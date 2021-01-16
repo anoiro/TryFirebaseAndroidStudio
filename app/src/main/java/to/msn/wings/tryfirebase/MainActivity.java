@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import java.util.Date;
 
-public class MainActivity extends AppCompat {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
