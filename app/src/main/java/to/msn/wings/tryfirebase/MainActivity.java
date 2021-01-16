@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         // ドキュメントとコレクションの指定
         DocumentReference mDocRef = FirebaseFirestore.getInstance().document("test/sample");
+
         // Firebaseからの受信
         mDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                         //値が取得できた時の処理
                         String save = (String) document.get("sampleString");
                         Toast toast = Toast.makeText(
-                                MainActivity.this, save, Toast.LENGTH_LONG);
+                                MainActivity.this, "取得できた", Toast.LENGTH_LONG);
                         toast.show();
                     }else{
                         Toast toast = Toast.makeText(
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }else{
                     Toast toast = Toast.makeText(
-                            MainActivity.this, "値の取得に失敗", Toast.LENGTH_LONG);
+                            MainActivity.this, "取得に失敗", Toast.LENGTH_LONG);
                     toast.show();
                 }
             }
