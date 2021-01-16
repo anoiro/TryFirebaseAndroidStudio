@@ -1,5 +1,6 @@
 package to.msn.wings.tryfirebase;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -8,6 +9,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Date;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,9 +29,36 @@ public class MainActivity extends AppCompatActivity {
         txt.setText(new Date().toString());
 
         // トーストバージョン
-        Toast toast = Toast.makeText(
-                this, new Date().toString(), Toast.LENGTH_LONG);
-        toast.show();
+//        Toast toast = Toast.makeText(
+//                this, new Date().toString(), Toast.LENGTH_LONG);
+//        toast.show();
+
+        // ドキュメントとコレクションの指定
+        DocumentReference mDocRef = FirebaseFirestore.getInstance().document("test/sample");
+        // Firebaseからの受信
+        mDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        //値が取得できた時の処理
+                        String save = (String) document.get("sampleString");
+                        Toast toast = Toast.makeText(
+                                MainActivity.this, save, Toast.LENGTH_LONG);
+                        toast.show();
+                    }else{
+                        Toast toast = Toast.makeText(
+                                MainActivity.this, "documentがなかった", Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                }else{
+                    Toast toast = Toast.makeText(
+                            MainActivity.this, "値の取得に失敗", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
     }
 
     // 画面回転対策
