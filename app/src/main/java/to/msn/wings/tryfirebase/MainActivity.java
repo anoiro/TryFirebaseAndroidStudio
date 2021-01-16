@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -19,6 +20,11 @@ public class MainActivity extends AppCompatActivity {
     public void btnCurrent_onClick(View view){
         TextView txt = (TextView)findViewById(R.id.txtResult);
         txt.setText(new Date().toString());
+
+        // トーストバージョン
+        Toast toast = Toast.makeText(
+                this, new Date().toString(), Toast.LENGTH_LONG);
+        toast.show();
     }
 
     // 画面回転対策
