@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                         //値が取得できた時の処理
                         String save = (String) document.get("sampleString");
                         Toast toast = Toast.makeText(
-                                MainActivity.this, "取得できた", Toast.LENGTH_LONG);
+                                MainActivity.this, "取得"+save+"した", Toast.LENGTH_LONG);
                         toast.show();
                     }else{
                         Toast toast = Toast.makeText(
