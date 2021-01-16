@@ -20,6 +20,7 @@
         android:id="@+id/btnCurrent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="btnCurrent_onClick"
         android:text="Firebaseから取得" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
