@@ -13,8 +13,8 @@ buildscript {
         // in the individual module build.gradle files
 
         // 追加
-        implementation 'com.google.firebase:firebase-core:17.0.0'
-        implementation 'com.google.firebase:firebase-firestore:20.0.0'
+        implementation('com.google.firebase:firebase-core:17.0.0')
+        implementation('com.google.firebase:firebase-firestore:20.0.0')
     }
 }
 
