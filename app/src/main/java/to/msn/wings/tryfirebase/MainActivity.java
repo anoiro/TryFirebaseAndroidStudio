@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.functions.FirebaseFunctions;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
         // ドキュメントとコレクションの指定
         DocumentReference mDocRef = FirebaseFirestore.getInstance().document("test/sample");
 
+        // Firebaseへの送信
+        Map<String, Object> data = new HashMap<>();
+        data.put("D","なし");
+        data.put("E","オレンジ");
+        data.put("F","すいか");
+        mDocRef.set(data);
+
         // Firebaseからの受信
         mDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -46,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         //値が取得できた時の処理
-                        String save = (String) document.get("sampleString");
+                        String save = (String) document.get("E");
                         Toast toast = Toast.makeText(
-                                MainActivity.this, "取得"+save+"した", Toast.LENGTH_LONG);
+                                MainActivity.this, save, Toast.LENGTH_LONG);
                         toast.show();
                     }else{
                         Toast toast = Toast.makeText(
