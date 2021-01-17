@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Toast toast = Toast.makeText(
-                                        MainActivity.this, document.getId() + " => " + document.getData(), Toast.LENGTH_LONG);
+                                        MainActivity.this, document.getId() + " => " + document.get("first"), Toast.LENGTH_LONG);
                                 toast.show();
                             }
                         // 取得失敗
